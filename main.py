@@ -19,6 +19,8 @@ def main() -> None:
     text = ROAST.strip()
     if not 1 <= len(text) <= 200:
         raise ValueError(f"entry must be 1-200 characters, got {len(text)}")
+    if "\n" in text or "\r" in text:
+        raise ValueError("entry must be a single line")
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text(text + "\n", encoding="utf-8")
     print(f"Wrote {len(text)} characters to {OUTPUT_PATH}")
